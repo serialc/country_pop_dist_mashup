@@ -1,0 +1,389 @@
+<!doctype html>
+<html>
+<head>
+ <title>Country Lat/Long Population Analysis</title>
+ <link href="css/llanalysis.css" type="text/css" rel="stylesheet">
+ <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+ <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script> 
+ <script src="js/jquery-1.6.4.min.js"></script>
+</head>
+<body>
+ <div id='hband'>
+  <div class='wrapper'>
+   <div id='header'>
+    <div id='statement'>Country population distributions</div>
+   </div>
+  </div>
+ </div>
+ <div id='cband'>
+  <div class='wrapper'>
+   <div id='content'>
+    Select a country to display: <select id='countrysel'></select><br>
+    Show guidelines: <input type='checkbox' id='llguides'>
+    <h2 id='ctitle'></h2>
+    <div id='mdata'>
+     <div id='map'> </div>
+     <div id='cht1'> </div>
+     <div id='cht2'> </div>
+    </div>
+   </div>
+  </div>
+ </div>
+ <div id='fband'>
+  <div class='wrapper'>
+   <div id='footer'>
+    <p>Cyrille M&eacute;dard de Chardon</p>
+    <p>This product includes data created by MaxMind, available from <a href='http://www.maxmind.com/'>www.maxmind.com</a></p>
+   </div>
+  </div>
+ </div>
+</body>
+<script type='text/javascript'>
+
+//holds map object
+var map;
+var lllines = false;
+
+var getCountry = function (tld) {
+	return $('#countrysel option[value="' + tld + '"]').html();
+}
+
+var fillGratSpaces = function (data, lat_or_lng) {
+	var gap, i, row;
+
+	gap = '';
+	//fill gaps
+//	console.log(data);
+
+	if ( lat_or_lng === 'lat' ) {
+		for ( i = 0; i < data.length; i = i + 1 ) {
+			row = data[i].split('\t');
+
+			if ( gap !== '' && row[0] < (gap - 1) ) {
+				data.splice(i, 0, (gap - 1) + '\t0');
+				gap = gap - 1;
+			} else {
+				gap = parseInt(row[0], 10);
+			}
+		}
+	} else if ( lat_or_lng === 'lng' ) {
+		//fix lng
+		for ( i = 0; i < data.length; i = i + 1 ) {
+			row = data[i].split('\t');
+
+			if ( gap !== '' && row[0] > (gap + 1) ) {
+				data.splice(i, 0, (gap + 1) + '\t0');
+				gap = gap + 1;
+			} else {
+				gap = parseInt(row[0], 10);
+			}
+		}
+
+	} else {
+		console.log('an error occured in fillGratSpaces');
+	}
+	
+	return data;
+}
+
+var chartLat = function (table) {
+	//#cht1 is lat
+
+	var data, rows, row, i, chart, grat_lines, grat_obj, gap;
+
+	//remove last return
+	table = table.replace(/\n$/, '');
+
+	data = new google.visualization.DataTable();
+	data.addColumn('string', 'Latitude');
+	data.addColumn('number', 'Population');
+	
+	//split table into rows
+	rows = table.split('\n');
+
+	//fill gaps in rows
+	rows = fillGratSpaces(rows, 'lat');
+
+	//create the space for the data
+	data.addRows(rows.length);
+
+	for( i = 0; i < rows.length; i = i + 1 ) {
+		//split row into columns
+		row = rows[i].split('\t');
+
+		//build chart data
+		data.setValue( i, 0, row[0] );
+		data.setValue( i, 1, parseInt(row[1], 10) );
+
+		//add lat/long graticule
+		if(lllines) {
+			grat_lines = [
+				new google.maps.LatLng(row[0], 0),
+				new google.maps.LatLng(row[0], 179),
+				new google.maps.LatLng(row[0], -179),
+				new google.maps.LatLng(row[0], 0)
+			];
+
+			grat_obj = new google.maps.Polyline({
+				path: grat_lines,
+				strokeColor: "#3366cc",
+				strokeOpacity: 0.3,
+				strokeWeight: 3
+			});
+
+			//add to global map object
+			grat_obj.setMap(map);
+		}
+	}
+
+	chart = new google.visualization.BarChart(document.getElementById('cht1'));
+	chart.draw(data, 
+		{width: 200,
+		height: 400,
+		//title: 'Population latitude distribution',
+		enableInteractivity: true,
+		titlePosition: 'out',
+		chartArea: {
+			left: 	70,
+			top:	0,
+			width:	'70%',
+			height: '90%'
+		},
+		vAxis: {
+			title: 'Latitude',
+			titleTextStyle: {
+				color: '#3366cc'
+			}
+		},
+		hAxis: {
+			direction: -1
+		},
+		legend: 'none'
+	});
+}
+
+var chartLng = function(table) {
+	//#cht2 is lng
+
+	var data, rows, row, i, chart, grat_lines, grat_obj, gap;
+
+	//remove last return
+	table = table.replace(/\n$/, '');
+
+	data = new google.visualization.DataTable();
+	data.addColumn('string', 'Latitude');
+	data.addColumn('number', 'Population');
+	
+	//split table into rows
+	rows = table.split('\n');
+
+	//fill gaps in rows
+	rows = fillGratSpaces(rows, 'lng');
+
+	//create the space for the data, must be after hole fill loop above
+	data.addRows(rows.length);
+
+	for ( i = 0; i < rows.length; i = i + 1 ) {
+		//split row into columns
+		row = rows[i].split('\t');
+
+		if ( gap !== '' && gap > (row[0] + 1) ) {
+
+		}
+		gap = row[0];
+
+		//build chart data
+		data.setValue( i, 0, row[0] );
+		data.setValue( i, 1, parseInt(row[1], 10) );
+
+		//add lat/long graticule
+		if(lllines) {
+			grat_lines = [
+				new google.maps.LatLng(0, row[0]),
+				new google.maps.LatLng(89, row[0]),
+				new google.maps.LatLng(-89, row[0]),
+				new google.maps.LatLng(0, row[0])
+			];
+
+			grat_obj = new google.maps.Polyline({
+				path: grat_lines,
+				strokeColor: "#dc3912",
+				strokeOpacity: 0.3,
+				strokeWeight: 3
+			});
+
+			//add to global map object
+			grat_obj.setMap(map);
+		}
+
+	
+	}
+
+	chart = new google.visualization.ColumnChart(document.getElementById('cht2'));
+	chart.draw(data, 
+		{width: 400,
+		height: 200,
+		//title: 'Population latitude distribution',
+		enableInteractivity: true,
+		titlePosition: 'out',
+		colors: ['#dc3912'],
+		chartArea: {
+			left: 	70,
+			top:	0,
+			width:	'90%',
+			height: '70%'
+		},
+		vAxis: {
+			direction: -1
+		},
+		hAxis: {
+			title: 'Longitude',
+			titleTextStyle: {
+				color: '#dc3912'
+			}
+		},
+		legend: 'none'
+	});	
+}
+
+var displayCountry = function (passed) {
+
+	var ccode, latlng, myOptions, geocoder, country, styling, grat_lines, grat_obj;
+
+	ccode = this.value;
+
+	if ( typeof passed === 'string' ) {
+		ccode = passed;
+	}
+
+	//load the files required using AJAX
+	$.ajax({
+		type:	"GET",
+		url:	'data/lat/' + ccode + '.txt',
+		//cache: false,
+		success: chartLat
+	});
+
+	$.ajax({
+		type:	"GET",
+		url:	'data/lng/' + ccode + '.txt',
+		//cache: false,
+		success: chartLng
+	});
+
+	//load the map
+	
+	//get country string
+	country = getCountry(ccode);
+
+	latlng = new google.maps.LatLng(0, 0);
+	geocoder = new google.maps.Geocoder();
+
+	myOptions = {
+		zoom: 18,
+		center: latlng,
+		streetViewControl: false,
+		panControl: false,
+		mapTypeControl: false,
+		zoomControlOptions: {
+			style: 'SMALL'
+		},
+		mapTypeId: google.maps.MapTypeId.ROADMAP
+	};
+
+	//define styling
+	styling = [{
+			featureType: 'administrative.country',
+			elementType: 'geometry',
+			stylers: [
+				{ hue: "#000000" },
+				{ gamma: 1.51 },
+				{ invert_lightness: true }
+			]
+		}];
+
+
+	//create map and style it
+	map = new google.maps.Map(document.getElementById("map"), myOptions);
+	map.setOptions({styles: styling});
+
+	//focus the map on the correct country
+	geocoder.geocode( { 'address': country}, function(results, status) {
+		if (status == google.maps.GeocoderStatus.OK) {
+			map.setCenter(results[0].geometry.location);
+			map.fitBounds(results[0].geometry.bounds);
+		} else {
+			alert("Geocode was not successful for the following reason: " + status);
+		}
+	});	
+
+	//update title
+	$('#ctitle').html(getCountry(ccode));
+}
+
+//called by an AJAX function to populate the select option
+var populateSelect = function (table) {
+	var rows, row, i, op_string, def_ccode;
+
+	//set the default start country
+	def_ccode = 'ch';
+
+	//remove last return
+	table = table.replace(/\n$/, '');
+
+	//will use to build up string to implant in DOM
+	op_string = '';
+
+	//split file into rows
+	rows = table.split('\n');
+	//rows = table.split('\r');	//depending on ajax request return character is different (why?)
+
+	//go through list of all countries
+	for( i = 0; i < rows.length; i = i + 1 ) {
+		//split row into columns
+		row = rows[i].split('\t');
+		//build up string to add to select
+		op_string = op_string + "<option value='" + row[0] + "'>" + row[2] + '</option>';
+	}
+
+	//add options to select object
+	$('#countrysel').html(op_string);
+
+	//bind event handler
+	$('#countrysel').change(displayCountry);
+
+	//change dropdown selection to switzerland
+	$('#countrysel').val(def_ccode).attr('selected', true);
+
+	//show default chart (Switzerland)
+	displayCountry(def_ccode);
+
+}
+
+//called on page load
+var pageInit = function () {
+	$.ajax({
+		type:	"GET",
+		url:	"data/countryCodes.txt",
+		cache: 	false,//set to true after testing
+		success: populateSelect
+	});
+
+	$('#llguides').change(function() {
+		if(lllines) {
+			lllines = false;
+		} else {
+			lllines = true;
+		}
+		displayCountry($('#countrysel').val());
+	});
+}
+
+// Load the Visualization API and the piechart package.
+google.load('visualization', '1.0', {'packages':['corechart']});
+      
+// Set a callback to run when the Google Visualization API is loaded.
+google.setOnLoadCallback(pageInit);
+
+</script>
+</html>

@@ -1,0 +1,234 @@
+wo	0	World
+af	70547	Afghanistan 
+al	15123	Albania 
+dz	9984	Algeria 
+ad	92	Andorra 
+ao	13796	Angola 
+ai	42	Anguilla 
+ag	183	Antigua and Barbuda 
+ar	8735	Argentina 
+am	2890	Armenia 
+aw	115	Aruba 
+au	10350	Australia 
+at	14976	Austria 
+az	10977	Azerbaijan 
+bs	501	Bahamas 
+bh	343	Bahrain 
+bd	26414	Bangladesh 
+bb	536	Barbados 
+by	15310	Belarus 
+be	16218	Belgium 
+bz	560	Belize 
+bj	4390	Benin 
+bm	22	Bermuda 
+bt	284	Bhutan 
+bo	15900	Bolivia 
+ba	15999	Bosnia and Herzegovina 
+bw	543	Botswana 
+br	33345	Brazil 
+vg	22	British Virgin Islands 
+bn	334	Brunei Darussalam 
+bg	20106	Bulgaria 
+bf	10468	Burkina Faso 
+bi	2054	Burundi 
+ci	11541	Cote d'Ivoire 
+kh	14447	Cambodia 
+cm	9862	Cameroon 
+ca	5521	Canada 
+cv	319	Cape Verde 
+ky	73	Cayman Islands 
+cf	5727	Central African Republic 
+td	10992	Chad 
+cl	4375	Chile 
+cx	6	Christmas Island 
+cc	1	Cocos (Keeling) Islands 
+co	25529	Colombia 
+km	564	Comoros 
+ck	56	Cook Islands 
+cr	2554	Costa Rica 
+hr	12105	Croatia 
+cu	9485	Cuba 
+cy	2800	Cyprus 
+cz	22152	Czech Republic 
+kp	29358	Democratic People's Republic of Korea 
+cd	23013	Democratic Republic of the Congo 
+dk	8651	Denmark 
+dj	91	Djibouti 
+dm	127	Dominica 
+do	10359	Dominican Republic 
+ec	8305	Ecuador 
+eg	13924	Egypt 
+sv	4779	El Salvador 
+gq	2283	Equatorial Guinea 
+er	1221	Eritrea 
+ee	9377	Estonia 
+et	13133	Ethiopia 
+fk	91	Falkland Islands 
+fo	430	Faroe Islands 
+fm	869	Federated States of Micronesia 
+fj	1576	Fiji 
+fi	13588	Finland 
+fr	66361	France 
+gf	760	French Guiana 
+pf	362	French Polynesia 
+tf	1	French Southern and Antarctic Lands 
+ga	3924	Gabon 
+ge	7533	Georgia 
+de	70477	Germany 
+gh	14893	Ghana 
+gi	8	Gibraltar 
+gr	23263	Greece 
+gl	587	Greenland 
+gd	317	Grenada 
+gp	525	Guadeloupe 
+gt	6961	Guatemala 
+gg	265	Guernsey 
+gn	7781	Guinea 
+gw	4908	Guinea-Bissau 
+gy	626	Guyana 
+ht	10644	Haiti 
+hn	12249	Honduras 
+hk	1261	Hong Kong 
+hu	18628	Hungary 
+is	592	Iceland 
+in	32266	India 
+id	118835	Indonesia 
+ir	114714	Iran 
+iq	17343	Iraq 
+im	45	Isle of Man 
+il	3431	Israel 
+it	20556	Italy 
+jm	2661	Jamaica 
+jp	17076	Japan 
+je	53	Jersey 
+jo	1950	Jordan 
+kz	14745	Kazakhstan 
+ke	2910	Kenya 
+ki	165	Kiribati 
+kw	283	Kuwait 
+kg	1580	Kyrgyzstan 
+la	16477	Laos 
+lv	9233	Latvia 
+lb	6782	Lebanon 
+ls	439	Lesotho 
+lr	8481	Liberia 
+ly	1998	Libya 
+li	42	Liechtenstein 
+lt	17341	Lithuania 
+lu	966	Luxembourg 
+mo	18	Macau 
+mg	18423	Madagascar 
+mw	4856	Malawi 
+my	16576	Malaysia 
+mv	29	Maldives 
+ml	12294	Mali 
+mt	587	Malta 
+mh	6	Marshall Islands 
+mq	804	Martinique 
+mr	1110	Mauritania 
+mu	633	Mauritius 
+yt	122	Mayotte 
+mx	62134	Mexico 
+md	5928	Moldova 
+mc	7	Monaco 
+mn	6058	Mongolia 
+me	4066	Montenegro 
+ms	92	Montserrat 
+ma	29171	Morocco 
+mz	21241	Mozambique 
+mm	33856	Myanmar 
+na	2270	Namibia 
+nr	13	Nauru 
+np	1067	Nepal 
+nl	8908	Netherlands 
+an	269	Netherlands Antilles 
+nc	702	New Caledonia 
+nz	2643	New Zealand 
+ni	3215	Nicaragua 
+ne	8745	Niger 
+ng	34284	Nigeria 
+nu	16	Niue 
+nf	1	Norfolk Island 
+mp	633	Northern Mariana Islands 
+no	12472	Norway 
+om	2790	Oman 
+pk	73311	Pakistan 
+pw	446	Palau 
+ps	1569	Palestinian territories 
+pa	6881	Panama 
+pg	14131	Papua New Guinea 
+py	2506	Paraguay 
+cn	117508	People's Republic of China 
+pe	26549	Peru 
+ph	40809	Philippines 
+pn	1	Pitcairn Islands 
+pl	52507	Poland 
+pt	15300	Portugal 
+qa	361	Qatar 
+re	401	Reunion 
+tw	12454	Republic of China (Taiwan) 
+ie	9180	Republic of Ireland
+kr	23628	Republic of Korea 
+mk	3494	Republic of Macedonia 
+cg	6399	Republic of the Congo 
+ro	28997	Romania 
+ru	176929	Russia 
+rw	1552	Rwanda 
+sh	16	Saint Helena 
+kn	187	Saint Kitts and Nevis 
+lc	211	Saint Lucia 
+vc	85	Saint Vincent and the Grenadines 
+pm	3	Saint-Pierre and Miquelon 
+ws	326	Samoa 
+sm	8	San Marino 
+st	236	Sao Tome and Principe
+sa	4639	Saudi Arabia 
+sn	12132	Senegal 
+rs	14844	Serbia 
+sc	21	Seychelles 
+sl	5711	Sierra Leone 
+sg	441	Singapore 
+sk	6775	Slovakia 
+si	4901	Slovenia 
+sb	3574	Solomon Islands 
+so	6137	Somalia 
+za	12765	South Africa 
+gs	2	South Georgia and the South Sandwich Islands 
+es	31484	Spain 
+lk	18214	Sri Lanka 
+sd	10944	Sudan 
+sr	728	Suriname 
+sj	19	Svalbard and  Jan Mayen Islands 
+sz	116	Swaziland 
+se	27813	Sweden 
+ch	3608	Switzerland 
+sy	18486	Syria 
+tj	3798	Tajikistan 
+tz	8004	Tanzania 
+th	36395	Thailand 
+gm	2505	The Gambia 
+tg	5148	Togo 
+tk	1	Tokelau 
+to	138	Tonga 
+tt	555	Trinidad and Tobago 
+tn	3854	Tunisia 
+tr	60617	Turkey 
+tm	1820	Turkmenistan 
+tc	21	Turks and Caicos Islands 
+tv	14	Tuvalu 
+ug	6061	Uganda 
+ua	40029	Ukraine 
+ae	762	United Arab Emirates 
+gb	16883	United Kingdom 
+us	141989	United States of America 
+vi	22	United States Virgin Islands 
+uy	1103	Uruguay 
+uz	5655	Uzbekistan 
+vu	1395	Vanuatu 
+ve	20719	Venezuela 
+vn	31394	Vietnam 
+wf	39	Wallis and Futuna 
+eh	78	Western Sahara 
+ye	11747	Yemen 
+zm	13027	Zambia 
+zw	1341	Zimbabwe
